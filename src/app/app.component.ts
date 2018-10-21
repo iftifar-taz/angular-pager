@@ -35,13 +35,11 @@ export class AppComponent implements OnInit {
 
 	pagerOnChange(data: any) {
 		if (data.pageCount) {
-			this.pager.pageCount = 1*data.pageCount;
-			this.getTableDatas();
+			this.pager.pageCount = 1 * data.pageCount;
 		}
-
 		if (data.currentPage) {
 			this.pager.currentPage = data.currentPage;
-			this.getTableDatas();
 		}
+		this.getTableDatas();
 	}
 }
