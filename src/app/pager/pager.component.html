@@ -1,0 +1,39 @@
+<nav class="clearfix" aria-label="Page navigation">
+	<ul class="float-left pagination">
+		<!-- style display none class d-none -->
+		<li class="page-item" [ngClass]="getPreviousButtonClass()" (click)="changePageOnClick($event, 1)">
+			<span class="page-link"><i class="fas fa-chevron-left"></i><i class="fas fa-chevron-left"></i></span>
+		</li>
+		<li class="page-item" [ngClass]="getPreviousButtonClass()" (click)="changePageOnClick($event, pager.currentPage - 1)">
+			<span class="page-link"><i class="fas fa-chevron-left"></i></span>
+		</li>
+		<li *ngIf="pager.currentPage > 2" class="page-item" (click)="changePageOnClick($event, pager.currentPage - 2)">
+			<a class="page-link" href="javascript:;">{{pager.currentPage - 2}}</a>
+		</li>
+		<li *ngIf="pager.currentPage > 1" class="page-item" (click)="changePageOnClick($event, pager.currentPage - 1)">
+			<a class="page-link" href="javascript:;">{{pager.currentPage - 1}}</a>
+		</li>
+		<li class="page-item active">
+			<span class="page-link">{{pager.currentPage}} <span class="sr-only">(current)</span></span>
+		</li>
+		<li *ngIf="pager.currentPage * pager.pageCount < pager.totalCount" class="page-item" (click)="changePageOnClick($event, pager.currentPage + 1)">
+			<a class="page-link" href="javascript:;">{{pager.currentPage + 1}}</a>
+		</li>
+		<li *ngIf="(pager.currentPage + 1) * pager.pageCount < pager.totalCount" class="page-item" (click)="changePageOnClick($event, pager.currentPage + 2)">
+			<a class="page-link" href="javascript:;">{{pager.currentPage + 2}}</a>
+		</li>
+		<li class="page-item" [ngClass]="getNextButtonClass()"  (click)="changePageOnClick($event, pager.currentPage + 1)">
+			<a class="page-link" href="javascript:;"><i class="fas fa-chevron-right"></i></a>
+		</li>
+		<li class="page-item" [ngClass]="getNextButtonClass()"  (click)="changePageOnClick($event, pager.totalCount / pager.pageCount)">
+			<a class="page-link" href="javascript:;"><i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>
+		</li>
+	</ul>
+	<div class="form-group float-right">
+		<select class="form-control form-control-sm d-inline-block w-auto mr-2" (change)="pageCountOptionsOnChange($event)">
+			<option *ngFor="let option of pageCountOptions" value="{{option.value}}" [selected]="option.isSelected">{{option.text}}</option>
+		</select>
+		<span>Displaying {{((pager.currentPage - 1) * pager.pageCount) + 1}}-{{pager.currentPage * pager.pageCount >
+			pager.totalCount ? pager.totalCount : pager.currentPage * pager.pageCount}} of {{pager.totalCount}} items</span>
+	</div>
+</nav>

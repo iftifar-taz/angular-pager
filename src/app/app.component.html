@@ -1,0 +1,23 @@
+<div class="border border-secondery container">
+	<div class="my-5 text-center">
+		<h1>Welcome to {{ title }}!</h1>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">First</th>
+				<th scope="col">Last</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let tableData of tableDatas;">
+				<th scope="row">{{tableData.serial}}</th>
+				<td>{{tableData.first}}</td>
+				<td>{{tableData.last}}</td>
+			</tr>
+			<tr>
+		</tbody>
+	</table>
+	<div class="site-pager" [pager]="pager" (pagerEmitter)="pagerOnChange($event)"></div>
+</div>
