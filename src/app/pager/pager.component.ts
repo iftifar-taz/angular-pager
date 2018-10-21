@@ -62,8 +62,9 @@ export class PagerComponent implements OnInit {
 	}
 
 	getNextButtonClass() {
+		console.log(this.pager);
 		return {
-			disabled: (this.pager.pageCount * (this.pager.currentPage - 1)) + this.pager.pageCount > this.pager.totalCount
+			disabled: (this.pager.pageCount * (this.pager.currentPage - 1)) + this.pager.pageCount >= this.pager.totalCount
 		}
 	}
 
