@@ -63,14 +63,22 @@ export class PagerComponent implements OnInit {
 
 	getNextButtonClass() {
 		return {
-			disabled: (this.pager.pageCount * (this.pager.currentPage - 1)) + this.pager.pageCount > this.pager.totalCount
+			disabled: (this.pager.pageCount * (this.pager.currentPage - 1)) + this.pager.pageCount >= this.pager.totalCount
 		}
 	}
 
 	pageCountOptionsOnChange(event: any) {
-		this.pagerEmitter.emit({
-			pageCount: event.target.value
-		});
+		if(Math.ceil(this.pager.totalCount / event.target.value) < this.pager.currentPage) {
+			this.pagerEmitter.emit({
+				pageCount: event.target.value,
+				currentPage: Math.ceil(this.pager.totalCount / event.target.value)
+			});
+		} else {
+			this.pagerEmitter.emit({
+				pageCount: event.target.value
+			});
+		}
+
 	}
 
 	changePageOnClick(event: any, currentPage: number) {
